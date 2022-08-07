@@ -1,0 +1,47 @@
+{
+  "title": "API Result Data",
+  "heading": "This is an example JSON file for testing JOMG",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "copyright": "Steve Rogers"
+  },
+  "groups": [
+      {
+          "group_name": "Bus Stats",
+          "order": 1,
+          "details": [
+              {
+                  "is_visible": false,
+                  "heading": "Late running buses.",
+                  "order": 1,
+                  "percentage": 13.255
+              },
+              {
+                  "is_visible": true,
+                  "heading": "Cancelled buses.",
+                  "order": 2,
+                  "percentage": 4.5
+              }
+          ]
+      },
+      {
+        "group_name": "Train Stats",
+        "order": 1,
+        "details": [
+            {
+                "is_visible": false,
+                "heading": "Late running trains.",
+                "order": 1,
+                "percentage": 9.45
+            },
+            {
+                "is_visible": true,
+                "heading": "Cancelled trains.",
+                "order": 2,
+                "percentage": 35.62
+            }
+        ]
+    }      
+  ]
+}
