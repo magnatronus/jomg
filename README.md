@@ -8,12 +8,17 @@
 
 JOMG will create a set of 1 or more Dart models from each *.json* file that it finds in the defined *src_dir*, the number of generated classes will depend on how complex the JSON is. These files are created (or overwritten) to the defined *output_dir*.
 
+## Installation
+**JOMG** is intended for use when developing Dart/Flutter project so it should be installed in the **dev_dependencies** section of your projects **pubspec.yaml** file
 
-## Getting started
+```yaml
+dev_dependencies:
+  jomg:
+```
 
-Install the plugin as one of the  *dev_dependencies* in your project *pubspec.yaml* then at the top level create an entry to define the
-*src_dir* and *output_dir* directories. **PLEASE NOTE** these directories must exist. See below for an example entry, or look in 
-the `/example` directory at the *pubspec.yaml*.
+Then at the top level of your **pubspec.yaml** add entries to define the
+*src_dir* and *output_dir* directories, **PLEASE NOTE** these directories must exist. See below for an example entry, or look in 
+the *pubspec.yaml* in the `/example` directory.
 
 ```yaml
 jomg:
@@ -21,7 +26,7 @@ jomg:
   output_dir: 'lib/src/models'
   all_attributes_required: false
 ```
-There is a third configuration option *all_attributes_required*. This is optional and is only required if you wish all the attributes generated in a 
+There is a third configuration option *all_attributes_required*. This is *optional* and is only required if you wish all the attributes generated in a 
 model to be **required**. By default all are set to optional so they can be null if needed, this is done as the model does not know which attributes in the JSON
 are always present and which are not (its is simpler, and safer, to assume they can all be null).
 
@@ -60,7 +65,7 @@ the **help** structure could be called **help_answers**.
 
 ## Usage
 
-Just run the **flutter packages pub run jomg** command in the root of your project to start the generator process, and create the models from the JSON found.
+Just run the `flutter packages pub run jomg` command in the root of your project to start the generator process, and create the models from the JSON found.
 
 For example a simple object defined in a file called  entry.json:
 

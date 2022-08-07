@@ -7,27 +7,9 @@ import 'dart:io';
 
 import 'json_attribute.dart';
 
-/// This is the class that takes care of generating the various object models from the json that is found.
-/// 
+/// JsonObjectModelGenerator takes care of generating the various object models from the json that is found.
 /// [name] is the name of the json file without the extension
 /// [outputDirectory] where the generated models will be put
-/// 
-/// For example a simple object defined in a file called  entry.json:
-/// {
-///   "id": 1,
-///   "name": "Test Entry"
-/// }
-/// 
-/// would be converted  as entry_model.dart to
-/// 
-/// class EntryModel {
-///   final int? id;
-///   final String? name;
-///   EntryModel(this.id, this.name);
-/// }
-/// 
-/// The generator scans the specified directory (defined in pubspec.yaml) and converts the json into 1 or more object models
-/// creating the generated models in the specified output directory
 /// 
 class JsonObjectModelGenerator {
 
@@ -38,6 +20,7 @@ class JsonObjectModelGenerator {
   JsonObjectModelGenerator(this.name, {required this.outputDirectory, this.allAttributesRequired = false}); 
 
   /// Start the conversion process
+  /// [jsonString] - the json that needs converting as a string 
   Future <void> convert(String jsonString) async {
 
     // open the destination file
@@ -103,11 +86,13 @@ class JsonObjectModelGenerator {
 
 
   /// Detect if we are processing a generated type
+  /// [type] this is the detected JSON attribute type either a Dart type of suffixed with Model for a List or MAp
   bool _isSubType( String type){
     return type.contains("Model");
   }
 
   /// Generate an attribute map from the json primatives
+  /// [value] the JSOn string containing the object to map
   Map <String, JsonAttribute> _generateAttributeMap(String value) {
     Map<String, JsonAttribute> attributes = {};
     jsonDecode(value).forEach((key, value) { 
@@ -141,6 +126,8 @@ class JsonObjectModelGenerator {
   }
 
   /// This is where we recurse and deal with List and Map types
+  /// [key]  the name of the object
+  /// [value] the string representation of the JSON object
   processObject(String key, dynamic value){
     imports.add("import '${key}_model.dart';");
     final converter = JsonObjectModelGenerator(key, outputDirectory: outputDirectory);
@@ -150,12 +137,13 @@ class JsonObjectModelGenerator {
 
 
   /// Helper function to convert the first char of a string to uppercase
+  /// [value] the string to uppercase
   String _upperCaseFirst(String value){
     return "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}";
   }
 
   /// create a JSON/Dart compatible version of the attribute found
-  /// this will use caelCase and split if it finds an _ in the json attribute name
+  /// this will use camelCase and split if it finds an _ in the json attribute [name]
   /// i.e.  age converts to age
   /// but age_now converts to ageNow
   /// this is to provide consistency when generating the object models

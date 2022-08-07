@@ -1,6 +1,6 @@
 name: jomg
-description: A package to generate Dart objects from JSON definitions.
-version: 0.0.1-dev
+description: A build package to generate Dart objects models from  one or more JSON definitions.
+version: 0.0.2-dev
 homepage: https://github.com/magnatronus/jomg
 
 environment:
