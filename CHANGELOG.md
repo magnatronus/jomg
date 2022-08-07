@@ -1,4 +1,4 @@
-## 0.0.1-dev
+## 0.0.2-dev
 
 - Tidy up code formatting, add api help and update readme
 
