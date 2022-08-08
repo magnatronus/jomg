@@ -81,8 +81,16 @@ would be converted  as entry_model.dart to
 ```dart
 class EntryModel {
   final int? id;
-  final String? name;
-  EntryModel(this.id, this.name);
+  final String? fullName;
+  
+  EntryModel(this.id, this.fullNname);
+
+  static EntryModel fromJson(Map<String, dynamic> json) {
+    return EntryModel(
+      id: json['id'],
+      fullName: json['full_name']
+    );
+  }
 }
 ```
 
