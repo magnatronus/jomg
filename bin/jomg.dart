@@ -11,6 +11,9 @@ void main(List<String> arguments) async {
     print("Running JOMG builder.");
     await build();
     print("JOMG builder completed.");
+  } on JOMGJsonFormatException catch (e) {
+    print(e.toString());
+    return;
   } on JOMGYamlException {
     print(
         "No or incorrect jomg: entry definition in the pubspec.yaml. It MUST have both src_dir and output_dir defined.");

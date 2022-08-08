@@ -1,6 +1,6 @@
 name: jomg
 description: A build package to generate Dart objects models from  one or more JSON definitions.
-version: 0.0.3-dev
+version: 0.0.4-dev
 homepage: https://github.com/magnatronus/jomg
 
 environment:
@@ -17,6 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  mocktail: ^0.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

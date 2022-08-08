@@ -3,4 +3,5 @@
 // that can be found in the LICENSE file.
 export 'src/json_attribute.dart';
 export 'src/json_generator.dart';
+export 'src/conversion_utils.dart';
 export 'src/builder.dart';

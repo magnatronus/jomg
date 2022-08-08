@@ -1,3 +1,7 @@
+## 0.0.4-dev
+
+- added some tests and  code refactoring
+
 ## 0.0.3-dev
 
 - update readme
