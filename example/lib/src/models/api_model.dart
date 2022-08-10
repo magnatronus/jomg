@@ -1,5 +1,5 @@
 // auto generated file
-// generated - 2022-08-08 13:22:12.203707 
+// generated - 2022-08-10 13:40:03.843171 
 import 'version_model.dart';
 import 'groups_model.dart';
 
@@ -22,7 +22,7 @@ class ApiModel {
 			title: json['title'],
 			heading: json['heading'],
 			version: VersionModel.fromJson(json['version']),
-			groups: json['groups'].map<GroupsModel>((json) => GroupsModel.fromJson(json)).toList(),
+			groups: (json['groups'] !=  null) ? json['groups'].map<GroupsModel>((json) => GroupsModel.fromJson(json)).toList() : [],
 		);
 	}
 }

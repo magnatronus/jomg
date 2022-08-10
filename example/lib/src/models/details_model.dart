@@ -1,5 +1,5 @@
 // auto generated file
-// generated - 2022-08-08 13:22:12.202078 
+// generated - 2022-08-10 13:40:03.841514 
 
 class DetailsModel {
 

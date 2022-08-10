@@ -79,7 +79,7 @@ class JsonObjectModelGenerator {
     attributeMap.forEach((key, value) {
       if (value.type == "List" && value.cast != null) {
         output.writeln(
-            "\t\t\t${ConversionUtils.prepName(key)}: json['$key'].map<${value.cast}>((json) => ${value.cast}.fromJson(json)).toList(),");
+            "\t\t\t${ConversionUtils.prepName(key)}: (json['$key'] !=  null) ? json['$key'].map<${value.cast}>((json) => ${value.cast}.fromJson(json)).toList() : [],");
       } else {
         if (_isSubType(value.type)) {
           output.writeln(

@@ -1,3 +1,7 @@
+## 0.0.5-dev
+
+- added null check in fromJson for List types 
+
 ## 0.0.4-dev
 
 - added some tests and  code refactoring
