@@ -1,5 +1,5 @@
 // auto generated file
-// generated - 2022-08-10 13:40:03.842893 
+// generated - 2022-08-10 14:05:07.776162 
 import 'details_model.dart';
 
 class GroupsModel {
@@ -18,7 +18,7 @@ class GroupsModel {
 		return GroupsModel(
 			groupName: json['group_name'],
 			order: json['order'],
-			details: (json['details'] !=  null) ? json['details'].map<DetailsModel>((json) => DetailsModel.fromJson(json)).toList() : [],
+			details: (json['details'] !=  null) ? json['details'].map<DetailsModel>((json) => DetailsModel.fromJson(json)).toList() : json['details'],
 		);
 	}
 }

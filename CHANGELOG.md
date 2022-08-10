@@ -1,3 +1,7 @@
+## 0.0.6-dev
+
+- ensure null list types convert as null (not []) in fromJosn 
+
 ## 0.0.5-dev
 
 - added null check in fromJson for List types 

@@ -1,5 +1,5 @@
 // auto generated file
-// generated - 2022-08-10 13:40:03.878917 
+// generated - 2022-08-10 14:05:07.828001 
 import 'comments_model.dart';
 
 class EntryModel {
@@ -20,7 +20,7 @@ class EntryModel {
 		return EntryModel(
 			id: json['id'],
 			name: json['name'],
-			comments: (json['comments'] !=  null) ? json['comments'].map<CommentsModel>((json) => CommentsModel.fromJson(json)).toList() : [],
+			comments: (json['comments'] !=  null) ? json['comments'].map<CommentsModel>((json) => CommentsModel.fromJson(json)).toList() : json['comments'],
 			visible: json['visible'],
 		);
 	}
