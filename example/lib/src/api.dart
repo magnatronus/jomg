@@ -13,6 +13,11 @@ const jsonAsString = '''
     "minor": 0,
     "copyright": "Steve Rogers"
   },
+  "tags": [
+    "test",
+    "json",
+    "convert"
+  ],  
   "groups": [
       {
           "group_name": "Bus Stats",
@@ -34,7 +39,7 @@ const jsonAsString = '''
       },
       {
         "group_name": "Train Stats",
-        "order": 1,
+        "order": 2,
         "details": [
             {
                 "is_visible": false,

@@ -48,6 +48,12 @@ class _HomePageState extends State<HomePage> {
                 child: versionInfo(
                     result?.version, Theme.of(context).textTheme.headline6)),
 
+            // show tags
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: generateTags(result?.tags)
+            ),
+
             // show groups data
             Padding(
                 padding: const EdgeInsets.all(8),
@@ -56,6 +62,18 @@ class _HomePageState extends State<HomePage> {
           ],
         ));
   }
+
+  // Show the tags
+  Widget generateTags(List? tags){
+    String tagList = "";
+    if(tags != null && tags.isNotEmpty){
+      for(final tag in tags){
+        tagList += "$tag,";
+      }
+    }
+    return Text("[$tagList]");
+  }
+
 
   /// Display the version info
   Widget versionInfo(VersionModel? version, TextStyle? style) {

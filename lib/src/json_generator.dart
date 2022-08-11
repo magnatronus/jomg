@@ -8,6 +8,9 @@ import 'dart:io';
 import 'conversion_utils.dart';
 import 'json_attribute.dart';
 
+// enum for type checking
+enum ValueType { map, list, simple }
+
 /// Exception thrown when supplied JSON is not correct
 class JOMGJsonFormatException implements Exception {
   final String filename;
@@ -77,7 +80,9 @@ class JsonObjectModelGenerator {
         "\tstatic ${ConversionUtils.createModelName(name)} fromJson(Map<String,dynamic> json){");
     output.writeln("\t\treturn ${ConversionUtils.createModelName(name)}(");
     attributeMap.forEach((key, value) {
-      if (value.type == "List" && value.cast != null) {
+      if (value.type == "List" &&
+          value.cast != null &&
+          value.cast!.contains("Model")) {
         output.writeln(
             "\t\t\t${ConversionUtils.prepName(key)}: (json['$key'] !=  null) ? json['$key'].map<${value.cast}>((json) => ${value.cast}.fromJson(json)).toList() : json['$key'],");
       } else {
@@ -105,42 +110,63 @@ class JsonObjectModelGenerator {
     return type.contains("Model");
   }
 
+  /// Check and classify the type of passed in [value]
+  ValueType _checkRuntimeType(dynamic type) {
+    if (type.runtimeType.toString().startsWith("_InternalLinkedHashMap")) {
+      return ValueType.map;
+    }
+    if (type.runtimeType.toString().startsWith("List")) {
+      return ValueType.list;
+    }
+    return ValueType.simple;
+  }
+
   /// Generate an attribute map from the json primatives
-  /// [value] the JSOn string containing the object to map
-  Map<String, JsonAttribute> _generateAttributeMap(String value) {
+  /// [valuestr] the JSON string containing the object to map
+  Map<String, JsonAttribute> _generateAttributeMap(String valuestr) {
     Map<String, JsonAttribute> attributes = {};
     try {
-      jsonDecode(value).forEach((key, value) {
-        if (value.runtimeType.toString().startsWith("_InternalLinkedHashMap") ||
-            value.runtimeType.toString().startsWith("List")) {
-          // attempt to deal with a list
-          if (value.runtimeType.toString().startsWith("List")) {
+      jsonDecode(valuestr).forEach((key, value) {
+        // get the type and process
+        final valueType = _checkRuntimeType(value);
+        switch (valueType) {
+          case ValueType.list:
             if (value.length > 0) {
-              attributes.putIfAbsent(
-                  key,
-                  () => JsonAttribute("List",
-                      cast: "${ConversionUtils.createModelName(key)}"));
-              _processObject(key, value[0]);
+              // we need to check the sub type
+              final subType = _checkRuntimeType(value[0]);
+              if (subType == ValueType.map) {
+                attributes.putIfAbsent(
+                    key,
+                    () => JsonAttribute("List",
+                        cast: "${ConversionUtils.createModelName(key)}"));
+                _processObject(key, value[0]);
+              } else {
+                attributes.putIfAbsent(key, () => JsonAttribute("List"));
+              }
             } else {
               attributes.putIfAbsent(key, () => JsonAttribute("List"));
             }
-          }
+            break;
 
-          // deal with a Map
-          if (value.runtimeType
-              .toString()
-              .startsWith("_InternalLinkedHashMap")) {
-            attributes.putIfAbsent(key,
-                () => JsonAttribute("${ConversionUtils.createModelName(key)}"));
-            _processObject(key, value);
-          }
-        } else {
-          // work around as we cannot have a variable called "is" and when doing language on is "is" - Icelandic so we append  append l ?
-          if (key == "is") {
-            key = "isl";
-          }
-          attributes.putIfAbsent(
-              key, () => JsonAttribute(value.runtimeType.toString()));
+          case ValueType.map:
+            if ((value as Map).isEmpty) {
+              attributes.putIfAbsent(key, () => JsonAttribute("Map"));
+            } else {
+              attributes.putIfAbsent(
+                  key,
+                  () =>
+                      JsonAttribute("${ConversionUtils.createModelName(key)}"));
+              _processObject(key, value);
+            }
+            break;
+
+          default:
+            // work around (for something I converted) as we cannot have a variable called "is" and when doing language on is "is" - Icelandic so we append  append l ?
+            if (key == "is") {
+              key = "isl";
+            }
+            attributes.putIfAbsent(
+                key, () => JsonAttribute(value.runtimeType.toString()));
         }
       });
     } on FormatException {

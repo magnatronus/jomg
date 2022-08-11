@@ -1,3 +1,7 @@
+### 0.0.7-dev
+
+- update tests and refactor generator to correctly handle simple list types
+
 ## 0.0.6-dev
 
 - ensure null list types convert as null (not []) in fromJosn 

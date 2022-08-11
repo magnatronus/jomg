@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "name": "Test Entry",
+  "visible": false,
+  "tags": [
+    "one",
+    "two"
+  ],
+  "years":[
+    1911,
+    1912
+  ],
+  "none": [],
+  "version": {
+    "major": 2,
+    "minor": 1
+  },
+  "nomap": {},
+  "comments": [
+    {"id": 1, "title": "Just a Test comment", "is_visible": false}
+  ]
+}

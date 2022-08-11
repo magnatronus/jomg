@@ -6,6 +6,11 @@
     "minor": 0,
     "copyright": "Steve Rogers"
   },
+  "tags": [
+    "test",
+    "json",
+    "convert"
+  ],
   "groups": [
       {
           "group_name": "Bus Stats",
@@ -27,7 +32,7 @@
       },
       {
         "group_name": "Train Stats",
-        "order": 1,
+        "order": 2,
         "details": [
             {
                 "is_visible": false,

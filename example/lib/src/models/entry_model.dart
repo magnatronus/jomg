@@ -1,5 +1,5 @@
 // auto generated file
-// generated - 2022-08-10 14:05:07.828001 
+// generated - 2022-08-11 09:53:11.939361 
 import 'comments_model.dart';
 
 class EntryModel {

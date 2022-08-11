@@ -1,5 +1,5 @@
 // auto generated file
-// generated - 2022-08-10 14:05:07.776162 
+// generated - 2022-08-11 10:20:34.842247 
 import 'details_model.dart';
 
 class GroupsModel {

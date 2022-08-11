@@ -23,7 +23,7 @@ class JOMGNoOutputDirException implements Exception {}
 
 /// The main build function
 /// This starts the process of converting the found JSON files into Dart class definitions
-Future<void> build() async {
+Future<void> build({Map? config}) async {
   late final Directory sourceDirectory;
   late final Directory outputDirectory;
   late final bool allAttributesRequired;
@@ -31,7 +31,7 @@ Future<void> build() async {
   // load yaml settings for directory settings
   File yamlFile = File("pubspec.yaml");
   final yamlString = yamlFile.readAsStringSync();
-  Map yaml = loadYaml(yamlString);
+  Map yaml = (config != null) ? config : loadYaml(yamlString);
 
   // check that the required settings are defined
   final jomg = yaml['jomg'];
